@@ -1,82 +1,131 @@
-# Portfolio Pessoal
+# Dynamic Duo Portfolio
 
-Um portfólio moderno e responsivo construído com Next.js e Tailwind CSS.
+A modern, bilingual portfolio showcasing the collaborative work of two full-stack developers, built with Next.js and Tailwind CSS.
 
-## Características
+## Features
 
-- Design moderno e responsivo
-- Seções para apresentação, projetos e contato
-- Formulário de contato
-- Links para redes sociais
-- Animações suaves
-- Otimizado para SEO
+- 🌟 Animated star background with canvas
+- 🌐 Bilingual support (English/Portuguese)
+- 📱 Fully responsive design
+- 🎨 Modern UI with smooth animations
+- 🖼️ Large profile images with parallax effect
+- 🛠️ Interactive tech stack showcase
+- 📊 Project carousel
+- 📝 Contact form
+- 🔍 SEO optimized
 
-## Tecnologias Utilizadas
+## Tech Stack
 
+### Frontend
 - Next.js 14
 - React
 - TypeScript
 - Tailwind CSS
-- ESLint
+- Framer Motion
 
-## Como Executar
+### Design & Development Tools
+- Figma
+- Adobe XD
+- Illustrator
+- Photoshop
 
-1. Clone o repositório:
+### Mobile Development
+- React Native
+- Flutter
+- Dart
+- iOS & Android Store Publishing
+
+### Backend & Infrastructure
+- Node.js
+- Python
+- Firebase
+- Supabase
+- Xano
+- FlutterFlow
+- Google Cloud Platform
+
+### Analytics & Business Intelligence
+- PowerBI
+- Looker
+- Google Analytics
+
+## Getting Started
+
+1. Clone the repository:
 ```bash
-git clone [URL_DO_REPOSITÓRIO]
+git clone https://github.com/thedynamic-duo/portfolio.git
 ```
 
-2. Instale as dependências:
+2. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Execute o servidor de desenvolvimento:
+3. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Abra [http://localhost:3000](http://localhost:3000) no seu navegador.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Personalização
-
-### Imagens
-- Substitua as imagens em `/public/`:
-  - `profile-placeholder.jpg` - Sua foto de perfil
-  - `project-placeholder.jpg` - Imagens dos seus projetos
-
-### Conteúdo
-1. Edite `src/app/page.tsx` para atualizar:
-   - Seu nome
-   - Título profissional
-   - Descrição sobre você
-   - Projetos
-
-2. Edite `src/app/components/Contact.tsx` para atualizar:
-   - Informações de contato
-   - Links das redes sociais
-
-### Estilo
-- As cores principais podem ser alteradas no arquivo `tailwind.config.js`
-- O tema atual usa tons de roxo e rosa como cores principais
-
-## Estrutura do Projeto
+## Project Structure
 
 ```
 portfolio/
-├── public/              # Arquivos estáticos
+├── public/                 # Static assets
+│   ├── icons/             # Technology icons
+│   ├── samantha.png       # Profile images
+│   └── renan.png
 ├── src/
-│   ├── app/            # Páginas e componentes
-│   │   ├── components/ # Componentes reutilizáveis
-│   │   └── page.tsx    # Página principal
-│   └── styles/         # Estilos globais
-└── package.json        # Dependências e scripts
+│   ├── app/              # Pages and components
+│   │   ├── components/   # Reusable components
+│   │   │   ├── Contact.tsx
+│   │   │   ├── Navigation.tsx
+│   │   │   ├── OurExpertise.tsx
+│   │   │   ├── OurStory.tsx
+│   │   │   ├── ParallaxBackground.tsx
+│   │   │   ├── ProjectCarousel.tsx
+│   │   │   ├── ScrollAnimation.tsx
+│   │   │   ├── StarsBackground.tsx
+│   │   │   ├── TechIcon.tsx
+│   │   │   └── WhyWorkWithUs.tsx
+│   │   ├── about/        # About page
+│   │   ├── projetos/     # Projects page
+│   │   └── page.tsx      # Home page
+│   └── styles/           # Global styles
+└── package.json          # Dependencies and scripts
 ```
 
-## Contribuição
+## Customization
 
-Sinta-se à vontade para contribuir com melhorias através de pull requests.
+### Profile Images
+- Replace images in `/public/`:
+  - `samantha.png` - Samantha's profile image
+  - `renan.png` - Renan's profile image
 
-## Licença
+### Content
+1. Edit `src/app/page.tsx` to update:
+   - Names
+   - Professional titles
+   - About section
+   - Projects
+
+2. Edit `src/app/components/Contact.tsx` to update:
+   - Contact information
+   - Social media links
+
+### Styling
+- Main colors can be modified in `tailwind.config.js`
+- Current theme uses purple and pink as primary colors
+
+## Development Experience
+
+- Full-stack development expertise
+- Experience with large transportation and agribusiness companies
+- Mobile app development and store publishing
+- Product discovery and UX/UI design
+- Business intelligence and analytics
+
+## License
 
 MIT
