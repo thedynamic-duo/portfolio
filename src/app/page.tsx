@@ -12,6 +12,7 @@ import ParallaxBackground from './components/ParallaxBackground'
 import ProjectCarousel from './components/ProjectCarousel'
 import Pricing from './components/Pricing'
 import { motion } from 'framer-motion';
+import Navigation from './components/Navigation';
 
 const technologies = [
   'JavaScript',
@@ -62,6 +63,7 @@ export default function Home() {
 
   return (
     <>
+      <Navigation />
       <main className="min-h-screen relative">
         {/* Hero Section */}
         <motion.section
