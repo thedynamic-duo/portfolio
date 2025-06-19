@@ -11,6 +11,7 @@ import OurStory from './components/OurStory'
 import ParallaxBackground from './components/ParallaxBackground'
 import ProjectCarousel from './components/ProjectCarousel'
 import Pricing from './components/Pricing'
+import { motion } from 'framer-motion';
 
 const technologies = [
   'JavaScript',
@@ -53,7 +54,12 @@ export default function Home() {
     <>
       <main className="min-h-screen relative">
         {/* Hero Section */}
-        <section className="relative min-h-screen flex items-center justify-center bg-gray-950 text-white overflow-hidden z-10">
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="relative min-h-screen flex items-center justify-center bg-gray-950 text-white overflow-hidden z-10"
+        >
           <StarsBackground />
           <div className="container mx-auto px-4 relative z-10 flex flex-col md:grid md:grid-cols-3 items-center justify-center min-h-screen">
             {/* Renan - Left */}
@@ -167,28 +173,57 @@ export default function Home() {
               </div>
             </div>
           </div>
-        </section>
+        </motion.section>
 
-        <OurStory />
-        <WhyWorkWithUs />
-        <OurExpertise />
-        <ProjectCarousel />
-        <Pricing />
-
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.05 }}
+        >
+          <OurStory />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
+          <WhyWorkWithUs />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.15 }}
+        >
+          <OurExpertise />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+        >
+          <ProjectCarousel />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.25 }}
+        >
+          <Pricing />
+        </motion.div>
         {/* Contact Section */}
-        <Contact />
-
-        {/* Technologies Section */}
-        <section id="technologies" className="py-20 bg-gray-50 dark:bg-gray-900">
-          <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold text-center mb-12">Our Tech Stack</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 md:gap-12">
-              {technologies.map((tech) => (
-                <TechIcon key={tech} name={tech} />
-              ))}
-            </div>
-          </div>
-        </section>
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+        >
+          <Contact />
+        </motion.div>
       </main>
 
       {/* Rodapé preto com gradiente suave */}

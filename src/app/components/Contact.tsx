@@ -1,8 +1,31 @@
+import { useEffect, useRef, useState } from 'react';
+
 export default function Contact() {
+  // Fade-in animation
+  const [visible, setVisible] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const onScroll = () => {
+      if (ref.current) {
+        const rect = ref.current.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) setVisible(true);
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+
   return (
     <section id="contact" className="container mx-auto px-4 py-20">
-      <h2 className="text-3xl font-bold text-center mb-12">Get in Touch</h2>
-      <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-12">
+      <h2 className="text-3xl md:text-4xl font-extrabold mb-12 text-center text-white">
+        <span className="text-purple-500">Contact</span> Us
+      </h2>
+      <div ref={ref} className={`max-w-4xl mx-auto grid md:grid-cols-2 gap-12 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
         <div className="space-y-6">
           <h3 className="text-2xl font-semibold">Let's Work Together</h3>
           <p className="text-gray-300">
@@ -14,21 +37,21 @@ export default function Contact() {
             {/* Samantha's Contact */}
             <div className="space-y-2">
               <h4 className="font-semibold">Samantha Maia</h4>
-              <div className="flex items-center space-x-4">
-                <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center space-x-4 group">
+                <svg className="w-6 h-6 text-purple-500 transition-transform duration-300 group-hover:-rotate-12 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="text-gray-300">samantha@example.com</span>
+                <span className="text-gray-300">samantha.maiasaldanha@gmail.com</span>
               </div>
             </div>
             {/* Renan's Contact */}
             <div className="space-y-2">
               <h4 className="font-semibold">Renan Santos</h4>
-              <div className="flex items-center space-x-4">
-                <svg className="w-6 h-6 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="flex items-center space-x-4 group">
+                <svg className="w-6 h-6 text-purple-500 transition-transform duration-300 group-hover:rotate-12 group-hover:scale-125" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                 </svg>
-                <span className="text-gray-300">renan@example.com</span>
+                <span className="text-gray-300">devrsantos@gmail.com</span>
               </div>
             </div>
           </div>
@@ -55,30 +78,48 @@ export default function Contact() {
             </a>
           </div>
         </div>
-        <form className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium text-gray-300">Name</label>
+        <form className="space-y-8 bg-gray-900/80 rounded-2xl shadow-xl p-8 border border-gray-800 backdrop-blur-md">
+          {/* Floating label for Name */}
+          <div className="relative">
             <input
               type="text"
               id="name"
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500"
+              value={name}
+              onChange={e => setName(e.target.value)}
+              className="peer mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500 text-lg py-5 px-4 placeholder-transparent"
+              placeholder="Your name"
             />
+            <label htmlFor="name" className={`absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-base pointer-events-none transition-all duration-200
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-purple-400
+              ${name ? '-top-2 text-xs text-purple-400' : ''}`}>Name</label>
           </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-300">Email</label>
+          {/* Floating label for Email */}
+          <div className="relative">
             <input
               type="email"
               id="email"
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              className="peer mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500 text-lg py-5 px-4 placeholder-transparent"
+              placeholder="you@email.com"
             />
+            <label htmlFor="email" className={`absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 text-base pointer-events-none transition-all duration-200
+              peer-focus:-top-2 peer-focus:text-xs peer-focus:text-purple-400
+              ${email ? '-top-2 text-xs text-purple-400' : ''}`}>Email</label>
           </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium text-gray-300">Message</label>
+          {/* Floating label for Message */}
+          <div className="relative">
             <textarea
               id="message"
-              rows={4}
-              className="mt-1 block w-full rounded-md bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500"
+              value={message}
+              onChange={e => setMessage(e.target.value)}
+              rows={5}
+              className="peer mt-1 block w-full rounded-lg bg-gray-800 border-gray-700 text-white shadow-sm focus:border-purple-500 focus:ring-purple-500 text-lg py-5 px-4 placeholder-transparent resize-none"
+              placeholder="How can we help you?"
             ></textarea>
+            <label htmlFor="message" className={`absolute left-4 top-8 text-gray-400 text-base pointer-events-none transition-all duration-200
+              peer-focus:top-2 peer-focus:text-xs peer-focus:text-purple-400
+              ${message ? 'top-2 text-xs text-purple-400' : ''}`}>Message</label>
           </div>
           <button
             type="submit"
