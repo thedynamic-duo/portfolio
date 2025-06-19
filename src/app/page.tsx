@@ -35,6 +35,8 @@ export default function Home() {
   // Parallax state for each side
   const [parallaxLeft, setParallaxLeft] = useState({ x: 0, y: 0 });
   const [parallaxRight, setParallaxRight] = useState({ x: 0, y: 0 });
+  // Estado para controlar a visibilidade do mouse
+  const [showMouse, setShowMouse] = useState(true);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
@@ -50,6 +52,14 @@ export default function Home() {
     return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowMouse(window.scrollY < 10);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
     <>
       <main className="min-h-screen relative">
@@ -61,10 +71,10 @@ export default function Home() {
           className="relative min-h-screen flex items-center justify-center bg-gray-950 text-white overflow-hidden z-10"
         >
           <StarsBackground />
-          <div className="container mx-auto px-4 relative z-10 flex flex-col md:grid md:grid-cols-3 items-center justify-center min-h-screen">
+          <div className="container mx-auto px-4 relative z-10 flex flex-col md:grid md:grid-cols-3 items-center justify-center">
             {/* Renan - Left */}
             <div className="hidden md:flex flex-col items-center justify-center relative h-full">
-              <div className="relative w-96 h-96 flex items-center justify-center">
+              <div className="relative w-80 h-80 flex items-center justify-center">
                 {/* Efeitos de blur atrás da foto */}
                 <div className="absolute inset-0 w-full h-full">
                   {/* Círculo de blur principal */}
@@ -95,7 +105,7 @@ export default function Home() {
             </div>
 
             {/* Center Text */}
-            <div className="flex flex-col items-center justify-center text-center py-12 md:py-0">
+            <div className="flex flex-col items-center justify-center text-center py-6 md:py-0">
               <span className="text-lg md:text-xl text-gray-300 mb-2">Hello, we are</span>
               <h1 className="text-5xl md:text-7xl font-extrabold mb-4">
                 <span className="text-purple-500">Renan</span> & <span className="text-purple-500">Samantha</span>
@@ -121,7 +131,7 @@ export default function Home() {
 
             {/* Samantha - Right */}
             <div className="hidden md:flex flex-col items-center justify-center relative h-full">
-              <div className="relative w-96 h-96 flex items-center justify-center">
+              <div className="relative w-80 h-80 flex items-center justify-center">
                 {/* Efeitos de blur atrás da foto */}
                 <div className="absolute inset-0 w-full h-full">
                   {/* Círculo de blur principal */}
@@ -153,7 +163,7 @@ export default function Home() {
 
             {/* Mobile: show images above and below text */}
             <div className="flex md:hidden flex-col w-full items-center gap-8 mt-8">
-              <div className="relative w-64 h-64 rounded-2xl overflow-hidden border-4 border-white shadow-xl">
+              <div className="relative w-40 h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl">
                 <Image
                   src="/renan.png"
                   alt="Renan Santos"
@@ -162,7 +172,7 @@ export default function Home() {
                   priority
                 />
               </div>
-              <div className="relative w-64 h-64 rounded-2xl overflow-hidden border-4 border-white shadow-xl">
+              <div className="relative w-40 h-40 rounded-2xl overflow-hidden border-4 border-white shadow-xl">
                 <Image
                   src="/samantha.png"
                   alt="Samantha Maia"
@@ -175,20 +185,73 @@ export default function Home() {
           </div>
         </motion.section>
 
+        {/* Ícone do mouse para indicar rolagem */}
+        <div
+          className={`flex justify-center -mt-20 pb-[200px] transition-all duration-500
+            ${showMouse ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+        >
+          <div className="relative flex items-center justify-center" style={{ width: 32, height: 54 }}>
+            <svg width="32" height="54" viewBox="0 0 32 54" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect
+                x="1.5"
+                y="1.5"
+                width="29"
+                height="51"
+                rx="14.5"
+                stroke="#fff"
+                strokeWidth="3"
+                className={`mouse-outline transition-all duration-500 ${!showMouse ? 'mouse-outline-hide' : ''}`}
+              />
+            </svg>
+            {/* Seta roxa animada, centralizada verticalmente */}
+            <svg
+              className={`absolute left-1/2 bottom-1 arrow-down transition-all duration-500 ${showMouse ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+              style={{ transform: 'translate(-50%, -50%)' }}
+              width="12"
+              height="12"
+              viewBox="0 0 16 16"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M8 3V13" stroke="#a855f7" strokeWidth="2" strokeLinecap="round"/>
+              <path d="M4 9L8 13L12 9" stroke="#a855f7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <style jsx>{`
+              .mouse-outline {
+                stroke-dasharray: 160;
+                stroke-dashoffset: 0;
+                transition: stroke-dashoffset 0.7s cubic-bezier(0.4,0,0.2,1);
+              }
+              .mouse-outline-hide {
+                stroke-dashoffset: 160;
+              }
+              .arrow-down {
+                animation: arrowDownAnim 1.2s infinite;
+              }
+              @keyframes arrowDownAnim {
+                0% { opacity: 0; transform: translate(-50%, -50%) }
+                40% { opacity: 1; transform: translate(-50%, -40%) }
+                100% { opacity: 0; transform: translate(-50%, -30%) }
+              }
+            `}</style>
+          </div>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.4, delay: 0.05 }}
         >
-          <OurStory />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-        >
+        <OurExpertise />
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.4, delay: 0.2 }}
+      >
+        
           <WhyWorkWithUs />
         </motion.div>
         <motion.div
@@ -196,14 +259,6 @@ export default function Home() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.4, delay: 0.15 }}
-        >
-          <OurExpertise />
-        </motion.div>
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.4, delay: 0.2 }}
         >
           <ProjectCarousel />
         </motion.div>
