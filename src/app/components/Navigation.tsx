@@ -12,7 +12,9 @@ export default function Navigation() {
     <nav className="fixed top-0 w-full bg-black text-white backdrop-blur-sm z-50">
       <div className="container mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          <a href="/" className="text-xl font-bold text-white">Samantha & Renan</a>
+          <a href="/" className="text-xl font-bold text-white">
+            Dynamic <span className="text-purple-500">Duo</span>
+          </a>
           <div className="hidden md:flex space-x-6">
             <a href="/" className="text-gray-300 hover:text-white transition-colors">About</a>
             <a href="/projetos" className="text-gray-300 hover:text-white transition-colors">Projects</a>
